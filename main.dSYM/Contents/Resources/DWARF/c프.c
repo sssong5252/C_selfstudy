@@ -1,5 +1,5 @@
 #include <stdio.h>
-int main(void) {
+// int main(void) {
 
     // char data = 'a';
     // char key = 0xff;
@@ -156,15 +156,50 @@ int main(void) {
 
     // // for (i = 0; i < 5; i++)
     // //     printf("hello world");
-    int a, b, c;
-    for(a = 1; a <= 100; a++){
-        for(b = 1; b <= 100, b++) { 
-            for(c = 1; c <= 100, c++){ 
-                if((a*a + b*b) == c*c);
-                    printf("%d%d%d\n",a, b, c);
-            }
-        }
-    }
+    // int a, b, c;
+    // for(a = 1; a <= 100; a++){
+    //     for(b = 1; b <= 100, b++) { 
+    //         for(c = 1; c <= 100, c++){ 
+    //             if((a*a + b*b) == c*c);
+    //                 printf("%d%d%d\n",a, b, c);
+    //         }
+    //     }
+    // }
+int main(void) {
+    // char letter;
+
+    // while(1) {
+    //     printf("소문자를 입력하세요: ");
+    //     scanf("%c", &letter);
+
+    //     if(letter == 'Q')
+    //         break;
+    //     if(letter < 'a' || letter > 'z')
+    //         continue;
+
+    //     letter -= 32;
+    //     printf("변환된 대문자는 %c입니다.\n ", letter);
+    // }
+    // double divisor, divident, sum;
+    // int loop_count;
+
+    // divisor = 1.0;
+    // divident = 4.0;5
+    // sum = 0.0;
+    // printf("반복횟수: ");
+    // scanf("%d", &loop_count);
+
+    // while (loop_count > 0)
+    // {
+    //     sum = sum + divident / divisor;
+    //     divident = -1.0 * divident;
+    //     divisor = divisor + 2;
+    //     loop_count --;
+    // }
+    // printf("Pi = %f", sum);
+
+    
+    
     return 0;
 }
 
