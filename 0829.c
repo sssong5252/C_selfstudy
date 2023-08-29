@@ -1,3 +1,20 @@
+// // A[][]여기사 앞은 행, 뒤는 열(렬)이다
+// // 
+#include <stdio.h>
+ 
+int main() {
+    int i=1, sum=0;
+ 
+    while (i <= 10) {
+        sum += i;
+        i++;
+    }
+
+    printf("%d", sum);
+}
+
+
+
 // #include <stdio.h>
 // int main() {
 //     int i;
@@ -52,13 +69,55 @@
 // // //     return 0;
 // // //     }
 
-#include <stdio.h>
-int main() {
-    int scores[5] = {31, 63};
-    int i;
+// // // // #include <stdio.h>
+// // // // int main() {
+// // // //     int scores[5] = {31, 63};
+// // // //     int i;
 
-    for(i = 0; i < 5; i++)
-        printf("scores[%d] = %d\n", i, scores[i]);
+// // // //     for(i = 0; i < 5; i++)
+// // // //         printf("scores[%d] = %d\n", i, scores[i]);
 
-    return 0;
-}
+// // // //     return 0;
+// // // // }
+
+// // // // // #include <stdio.h>
+// // // // // int main() {
+// // // // //     int scores[5] = {31, 63, 62, 87, 14};
+// // // // //     int i;
+
+// // // // //     for(i = 0; i < 5; i++)
+// // // // //         printf("scores[%d] = %d\n", i, scores[i]);
+
+// // // // //     return 0;
+// // // // // }
+
+// // // // // // #include <stdio.h>
+// // // // // // int main() {
+// // // // // //     int scores[5];
+// // // // // //     int i;
+
+// // // // // //     for(i = 0; i < 5; i++)
+// // // // // //         printf("scores[%d] = %d\n", i, scores[i]);
+
+// // // // // //     return 0;
+// // // // // // }
+
+// // // // // // // #include <stdio.h>
+// // // // // // // #include <stdlib.h>
+// // // // // // // #define SIZE 6
+// // // // // // // int main(void) {
+// // // // // // //     int freq[SIZE] = { 0 };
+// // // // // // //     int i;
+    
+// // // // // // //     for(i = 0; i < 10000; i++)
+// // // // // // //         ++freq[ rand() % 6 ];
+
+// // // // // // //     printf("====================\n");
+// // // // // // //     printf("면 빈도\n");
+// // // // // // //     printf("====================\n");
+    
+// // // // // // //     for(i = 0; i < SIZE; i++)
+// // // // // // //         printf("%3d %3d \n", i, freq[i]);
+    
+// // // // // // //     return 0;
+// // // // // // //     }
