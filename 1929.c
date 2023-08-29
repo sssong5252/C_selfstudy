@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(void){
+int main(void) {
     
     int m,n,arr[1000001] = {0,};
     arr[1] = 1;

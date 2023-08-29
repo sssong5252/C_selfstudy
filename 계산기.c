@@ -32,7 +32,7 @@ int main(void)
     printf("연산: ");
     scanf("%s", &sss);
 
-    if(sss == '+')
+    if(sss == '+')%
         printf("%.1f + %.1f = %.2f\n", x, y, x + y);
 
     if(sss == 'x')
