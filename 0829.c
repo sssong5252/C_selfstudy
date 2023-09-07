@@ -1,10 +1,10 @@
 /*
 // // A[][]여기사 앞은 행, 뒤는 열(렬)이다
 // #include <stdio.h> //standard input output header file
- 
+
 // int main() {
 //     // int i=1, sum=0;
- 
+
 //     // while (i <= 10) {
 //     //     sum += i;
 //     //     i++;
@@ -22,23 +22,23 @@
 //     int scores[NUM_STUDENTS];
 //     int sum = 0;
 //     float average;
-    
+
 //     printf("100명의 학생 성적을 입력하세요:\n");
-    
+
 //     // 학생 성적 입력 받기
 //     for (int i = 0; i < NUM_STUDENTS; i++) {
 //         printf("학생 %d의 성적: ", i + 1);
 //         scanf("%d", &scores[i]);
-        
+
 //         sum += scores[i];
 //     }
-    
+
 //     // 평균 계산
 //     average = (float)sum / NUM_STUDENTS;
-    
+
 //     // 결과 출력
 //     printf("평균 점수: %.2f\n", average);
-    
+
 //     return 0;
 // }
 
@@ -94,7 +94,7 @@ int main(void) {
 
     average = (float)sum / STUDENTS;
     printf("성적 평균= %f\n", average);
-    
+
     return 0;
     }*/
 // #include <stdio.h>
@@ -136,67 +136,67 @@ int main(void) {
 // // // // // // // int main(void) {
 // // // // // // //     int freq[SIZE] = { 0 };
 // // // // // // //     int i;
-    
+
 // // // // // // //     for(i = 0; i < 10000; i++)
 // // // // // // //         ++freq[ rand() % 6 ];
 
 // // // // // // //     printf("====================\n");
 // // // // // // //     printf("면 빈도\n");
 // // // // // // //     printf("====================\n");
-    
+
 // // // // // // //     for(i = 0; i < SIZE; i++)
 // // // // // // //         printf("%3d %3d \n", i, freq[i]);
-    
+
 // // // // // // //     return 0;
 // // // // // // //     }
 /* #include <stdio.h>
 #define SIZE 5
 int main() {
-	int i;
-	int a[SIZE] = {1, 2, 3, 4, 5};
-	int b[SIZE] = {1, 2, 3, 4, 5};
-	if(a == b)
-		printf("xxx\n");
-	else
-		printf("xxx\n");
+    int i;
+    int a[SIZE] = {1, 2, 3, 4, 5};
+    int b[SIZE] = {1, 2, 3, 4, 5};
+    if(a == b)
+        printf("xxx\n");
+    else
+        printf("xxx\n");
 
-	}
+    }
 */
 
 /*#include <stdio.h>
 #define s 10
 int main() {
-	char ans1;
-	int ans2, i;
-	int seats[s] = {0};
+    char ans1;
+    int ans2, i;
+    int seats[s] = {0};
 
-	while(1) {
-		print("w")
-		scanf("%c", &ans1);
-	}
-	if(ans1 == 'y') {
-		printf("--------------\n");
-		printf("12345678910\n");
-		printf("--------------\n");
-		for(i = 0; i < s; i++)
-			printf("%d",seats[i]);
-		printf("\n");
-		printf("what seat?");
-		scanf("&d", &ans2);
-	
-		if(ans2 <= 0 || ans2 > s){
-			printf("1~10");
-			continue;
-		}
-		if(seats[ans2-1] == 0) {
-			seats[ans2-1] = 1;
-			printf("o")
-		}
-		else 
-			printf("x");
-	}
+    while(1) {
+        print("w")
+        scanf("%c", &ans1);
+    }
+    if(ans1 == 'y') {
+        printf("--------------\n");
+        printf("12345678910\n");
+        printf("--------------\n");
+        for(i = 0; i < s; i++)
+            printf("%d",seats[i]);
+        printf("\n");
+        printf("what seat?");
+        scanf("&d", &ans2);
 
-	*/
+        if(ans2 <= 0 || ans2 > s){
+            printf("1~10");
+            continue;
+        }
+        if(seats[ans2-1] == 0) {
+            seats[ans2-1] = 1;
+            printf("o")
+        }
+        else
+            printf("x");
+    }
+
+    */
 
 /*#include <stdio.h>
 #include <stdlib.h>
@@ -267,7 +267,7 @@ void printSeatStatus() {
 
     for (int i = 0; i < NUM_SEATS; i++) {
         printf("%d번 좌석: ", i + 1);
-        
+
         if (seats[i]) {
             printf("예약됨\n");
         } else {
@@ -298,34 +298,40 @@ int main() {
    return 0;
 }
 */
-/*
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define NUM_SEATS 100
 
 bool seats[NUM_SEATS];
 
-void initializeSeats() {
-    for (int i = 0; i < NUM_SEATS; i++) {
+void initializeSeats()
+{
+    for (int i = 0; i < NUM_SEATS; i++)
+    {
         seats[i] = false;
     }
 }
 
-void reserveSeat(int seatNumber) {
-    if (seatNumber >= 1 && seatNumber <= NUM_SEATS) {
-        if (seats[seatNumber - 1]) {
-            printf("%d번 자리는 이미 예약되었습니다.
-", seatNumber);
-        } else {
-            seats[seatNumber - 1] = true;
-            printf("%d번 자리가 성공적으로 예약되었습니다.
-", seatNumber);
+void reserveSeat(int seatNumber)
+{
+    if (seatNumber >= 1 && seatNumber <= NUM_SEATS)
+    {
+        if (seats[seatNumber - 1])
+        {
+            printf("%d번 자리는 이미 예약되었습니다.", seatNumber);
         }
-    } else {
-        printf("%d번은 유효하지 않은 자리 번호입니다.
-", seatNumber);
+        else
+        {
+            seats[seatNumber - 1] = true;
+            printf("%d번 자리가 성공적으로 예약되었습니다.", seatNumber);
+        }
+    }
+    else
+    {
+        printf("%d번은 유효하지 않은 자리 번호입니다.", seatNumber);
     }
 }
 
@@ -341,49 +347,54 @@ void reserveMultipleSeats(char* input) {
     }
 }
 
-void printSeatStatus() {
-    printf("영화관 좌석 현황:
-");
+
+void printSeatStatus()
+{
+    printf("영화관 좌석 현황:");
 
     for (int i = 0; i < NUM_SEATS; i++) {
         printf("%d번 좌석: ", i + 1);
 
-        if (seats[i]) {
-            printf("예약됨
-");
-        } else {
-            printf("비어있음
-");
+        if (seats[i])
+        {
+            printf("예약됨");
+        }
+        else
+        {
+            printf("비어있음");
         }
     }
+
+   printf("");
 }
 
-int main() {
+int main()
+{
+
     char input[100];
 
     initializeSeats();
 
-   while (true) { // 무한 반복
-       printSeatStatus();
+    while (true)
+    { // 무한 반복
+        printSeatStatus();
 
-       printf("
-예약할 좌석 번호를 입력하세요 (종료하려면 -1): ");
+       printf("예약할 좌석 번호를 입력하세요 (종료하려면 -1): ");
        fgets(input, sizeof(input), stdin);
 
        if (strcmp(input, "-1\n") == 0 || strcmp(input, "-1\r\n") == 0) { // 종료 조건
-           break;
+            break;
        }
 
        input[strcspn(input, "\r\n")] = '\0'; // 개행 문자 제거
 
        reserveMultipleSeats(input);
-       printf("
-");
-   }
+       printf("");
+    }
 
-   return 0;
+    return 0;
 }
-*/
+
 /*
 #include <stdio.h>
 #define SIZE 5
@@ -402,9 +413,9 @@ int findMinimum(int array[], int size) {
 
 int main() {
     int array[SIZE] = {10, 20, 30, 5, 15};
-    
+
     int minimum = findMinimum(array, SIZE);
-    
+
     printf("배열의 최솟값은 %d입니다.", minimum);
 
     return 0;
@@ -450,41 +461,48 @@ int main() {
    return 0;
 }
 */
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
-#define SIZE 5
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <time.h>
 
-int findMax(int array[], int size) {
-    int max = array[0];
+// #define SIZE 5
 
-    for (int i = 1; i < size; i++) {
-        if (array[i] > max) {
-            max = array[i];
-        }
-    }
+// void printName() {
+//     printf("20230850 송준용\n");
+// }
 
-    return max;
-}
+// int findMax(int array[], int size) {
+//     int max = array[0];
 
-int main() {
-    srand(time(NULL)); // 시드값 설정
+//     for (int i = 1; i < size; i++) {
+//         if (array[i] > max) {
+//             max = array[i];
+//         }
+//     }
 
-    int array[SIZE];
+//     return max;
+// }
 
-    printf("생성된 정수들: ");
+// int main() {
+//     srand(time(NULL)); // 시드값 설정
 
-    for (int i = 0; i < SIZE; i++) {
-        array[i] = rand() % 100; // 0부터 99까지의 난수 생성
-        printf("%d ", array[i]);
-    }
+//     int array[SIZE];
 
-    printf("");
+//     printf("생성된 정수들: ");
 
-    int max = findMax(array, SIZE);
+//     for (int i = 0; i < SIZE; i++) {
+//         array[i] = rand() % 100; // 0부터 99까지의 난수 생성
+//         printf("%d ", array[i]);
+//     }
 
-    printf("배열의 최댓값은 %d입니다.", max);
+//     printf("\n");
 
-   return 0;
-}
+//     int max = findMax(array, SIZE);
+
+//     printf("배열의 최댓값은 %d입니다.\n", max);
+
+//    printName();
+
+//    return 0;
+// }
