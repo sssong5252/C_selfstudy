@@ -1,9 +1,8 @@
 #include <stdio.h>
 
-char board[3][3];  // 틱택토 보드
+char board[3][3]; 
 
-// 게임/보드 초기화 함수
-void initialize() {
+void initialize_board() {
     int i, j;
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
@@ -12,73 +11,95 @@ void initialize() {
     }
 }
 
-// 틱택토 보드를 그리는 함수
-void drawBoard() {
-    int i;
+void print_board() {
+    int i, j;
+    printf("\n---보드 상태---\n");
     for (i = 0; i < 3; i++) {
-        printf(" %c | %c | %c ", board[i][0], 
-                               board[i][1], 
-                               board[i][2]);
-        if (i != 2) {
-            printf("\n---|---|---\n");
+        for (j = 0; j < 3; j++) {
+            printf(" %c ", board[i][j]);
+            if (j != 2) printf("|");
+        }
+        printf("\n");
+        if (i != 2) printf("---|---|---\n");
+    }
+}
+
+int check_win(char player) {
+    int i;
+
+    for (i = 0; i < 3; i++) {
+        if ((board[i][0] == player && board[i][1] == player && board[i][2] == player))
+            return 1;
+    }
+
+     for (i = 0; i < 3; ++i) 
+     { 
+         if ((board[0][i] == player && board[1][i] == player && board[2][i] == player)) 
+             return 1;
+     } 
+
+    if ((board[0][0] == player && board[1][1] == player && board[2][2] == player) ||
+        (board[0][2] == player && board[1][1] == player && board[2][0] == player))
+        return 1;
+
+    return 0;
+}
+
+int check_draw() {
+    int i, j;
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            if (board[i][j] == ' ')
+                return 0;
         }
     }
-    printf("\n");
+    return 1;
 }
 
-// 플레이어의 움직임을 처리하는 함수
-void makeMove(int player) {
-    int row, col;
+void play_game() {
+    int cell_number;
+    char current_player = 'X';
 
-    printf("Player %d, 원하는 위치의 행과 열 번호를 입력하세요: ", player);
-    
-	scanf("%d%d", &row, &col);
+    initialize_board();
 
-	if(board[row-1][col-1] == ' ') 
-		board[row-1][col-1] = (player == 1) ? 'X' : 'O';
-	else { 
-		printf("해당 위치는 이미 채워져 있습니다.\n다시 시도하세요...\n");
-		makeMove(player);
-	}
-}
+    printf("틱택토 게임을 시작합니다.\n");
 
-// 게임의 승자를 확인하는 함수
-int checkWin() {
+    while (1) {
+        printf("\n현재 차례: %c (%s)\n", current_player, (current_player=='X') ? "준용" : "Player2");
+        print_board();
 
-	int win = 0;
-	int line;
+        printf("칸 번호를 입력하세요. (예: 1~9): ");
+        scanf("%d", &cell_number);
 
-	if(board[0][0]==board[1][1] && board[0][0]==board[2][2]) { // 대각선 검사
-			if(board[0][0]=='X') win=1;
-			if(board[0][0]=='O') win=2;
-	}
-	
-	if(board[2 ][ O ]==board [l ][l ]&& board [Z ][O ]==board [ O ][ Z ]) { // 대각선 검사  
-			if(board [Z ][O ]=='X') win=l ;  
-			if(board [Z ][O ]=='O') win=Z ;  
-   }  
+		int row = (cell_number - 1) / 3;
+		int col = (cell_number - 1) % 3;
 
-	for(line=O;line<=Z;line ++) { // 가로와 세로 줄 검사   
-	   if((board[line ][ O ]==board[line ][ l ]&& board [line ][ O ]==board [line][ Z ]) ||   
-	      (board [ O ][ line]==board[ l ][line]&& board [ O ][ line]==board[ Z ]line])){   
-	          if(board[line)[l =='X')win=l;  
-	          if(board[line][l =='O')win=Z;  
-	   }   
-	}   
-	
-	return win; 
+		if ((cell_number >= 1 && cell_number <=9 ) && (board[row][col]==' ')) {
+			board[row][col]=current_player;
+
+			if (check_win(current_player)) {
+				printf("\n--- 게임 종료 ---\n");
+				printf("승리자: %c (%s)\n", current_player, (current_player=='X') ? "준용" : "Player2");
+				print_board();
+				break;
+			}
+
+			if (check_draw()) {
+				printf("\n--- 게임 종료 ---\n");
+				printf("비겼습니다.\n");
+				print_board();
+				break;
+			}
+
+			current_player = (current_player == 'X') ? 'O' : 'X';
+		} else {
+			printf("잘못된 칸 번호입니다. 다시 입력하세요.\n");
+        }
+    }
 }
 
 int main() {
-    int player = 1;
-    initialize(); // 보드 초기화
-    do {
-        drawBoard();
-        makeMove(player);
-        player = (player % 2) ? 2 : 1; // 플레이어 교체
-    } while(checkWin() == 0); // 승자가 결정될 때까지 계속
-
-    printf("Player %d님이 승리하였습니다!\n", (player % 2) ? 1 : 2);
+    play_game();
 
     return 0;
 }
