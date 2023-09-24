@@ -99,6 +99,7 @@ void play_game() {
 }
 
 int main() {
+    printf("20230850 컴퓨터공학과 송준용\n");
     play_game();
 
     return 0;
