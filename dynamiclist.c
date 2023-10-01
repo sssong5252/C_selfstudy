@@ -1,10 +1,13 @@
-#include <stdio.h> //입력받은 갯수만큼 정수 저장
+#include <stdio.h> 
+
+//입력받은 갯수만큼 정수 저장
 #include <stdlib.h>
 
-int main() {
+int 
+main() 
+{
     int *array; //포인터변수
     int n; //배열의 크기 저장
-    int i; //반복문
 
     printf("요소의 갯수를 입력하세요: "); //정수값 입력
     scanf("%d", &n);
@@ -16,9 +19,11 @@ int main() {
         return 0;
     }
 
+    int i; //반복문
     for(i = 0; i < n; i++){ //0부터 n-1 까지
         array[i] = i + 1;
     }
-    //배열값 출력
+    //TODO: 배열값 출력
     //free함수 == 할당된 메모리 공간 해제 == 메모리 누수 방지 == malloc이랑 짝처럼 다님
 }
+//realloc써서 늘어난 만큼 줄어든 만큼 해결해준다.
