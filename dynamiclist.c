@@ -23,7 +23,27 @@ main()
     for(i = 0; i < n; i++){ //0부터 n-1 까지
         array[i] = i + 1;
     }
-    //TODO: 배열값 출력
-    //free함수 == 할당된 메모리 공간 해제 == 메모리 누수 방지 == malloc이랑 짝처럼 다님
+
+        int movesize;
+        printf("추가할 요소 갯수: ");
+        scanf("%d", &movesize);
+
+        array = (int*) realloc(array, (n + movesize) * sizeof(int)); //realloc써서 늘어난 만큼 줄어든 만큼 해결해준다.
+
+        if(array == NULL) {
+            printf("메모리 재할당 실패!!");
+            return 0;
+        }
+
+        for(i = 0; i < n + movesize; ++i) {
+            array[i] = i + 1;
+        }
+
+        for(i = 0; i < n + movesize; ++i) {
+            printf("%d", array[i]);
+        }
+
+        free(array);//free함수 == 할당된 메모리 공간 해제 == 메모리 누수 방지 == malloc이랑 짝처럼 다님
+
+        return 0;
 }
-//realloc써서 늘어난 만큼 줄어든 만큼 해결해준다.
