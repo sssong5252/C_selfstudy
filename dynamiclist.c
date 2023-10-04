@@ -35,7 +35,7 @@ main()
             return 0;
         }
 
-        for(i = 0; i < n + movesize; ++i) {
+        for(i = 0; i < n + movesize; ++i) { //n+movesize 인 이유 = 길이가 늘어남에 따라 기존의 n에 늘어난 movesize만큼 추가하는 것이다.
             array[i] = i + 1;
         }
 
