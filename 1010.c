@@ -46,20 +46,20 @@
 //     printf("%d\n", qw);
 // }
 
-int main()
-{
-    int  v = 10;
-    int *p;
-    p = &v;
-    v = *p++;
-    printf("%d\n", v);
-    p = &v;
-    v = (*p)++;
-    printf("%d\n", v);
-    p = &v;
-    v = *++p;
-    printf("%d\n",v);
-    p = &v;
-    v = ++*p;
-    printf("%d\n",v);
-}
+// int main()
+// {
+//     int  v = 10;
+//     int *p;
+//     p = &v;
+//     v = *p++;
+//     printf("%d\n", v);
+//     p = &v;
+//     v = (*p)++;
+//     printf("%d\n", v);
+//     p = &v;
+//     v = *++p;
+//     printf("%d\n",v);
+//     p = &v;
+//     v = ++*p;
+//     printf("%d\n",v);
+// }
