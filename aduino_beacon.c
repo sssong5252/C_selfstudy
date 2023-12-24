@@ -2,8 +2,8 @@
 
 SoftwareSerial bluetooth(2, 3); // RX, TX 핀
 
-const long interval = 5 * 60 * 1000; // 5분에 해당하는 시간 (단위: millisecond)
-unsigned long previousMillis = 0; // 시간 저장 변수
+const long interval = 5 * 60 * 1000;
+unsigned long previousMillis = 0;
 
 void setup() {
   bluetooth.begin(9600); // 블루투스 모듈 초기화
