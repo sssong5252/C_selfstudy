@@ -144,8 +144,31 @@ void printTokens(Token* token) {
 }
 
 int main() {
-    char code[] = "int main() { return 0; }";
+    const int MAX_CODE_LENGTH = 1024;
+    char code[MAX_CODE_LENGTH];
+
+    printf("코드를 입력하세요: ");
+    if (fgets(code, MAX_CODE_LENGTH, stdin) == NULL) {
+        printf("입력 오류가 발생했습니다.\n");
+        return 1;
+    }
+
+    // 입력 받은 코드의 마지막에 있는 개행 문자를 제거합니다.
+    size_t len = strlen(code);
+    if (len > 0 && code[len - 1] == '\n') {
+        code[len - 1] = '\0';
+    }
+
     Token* tokens = tokenize(code);
     printTokens(tokens);
+
+    // 할당된 토큰들을 해제합니다.
+    while (tokens != NULL) {
+        Token* temp = tokens;
+        tokens = tokens->next;
+        free(temp->value);
+        free(temp);
+    }
+
     return 0;
 }
