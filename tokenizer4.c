@@ -53,7 +53,6 @@ Token* createToken(TokenType type, const char* value) {
     token->next = NULL;
     return token;
 }
-
 Token* tokenize(const char* src) {
     Token* head = NULL;
     Token* current = NULL;
@@ -80,9 +79,7 @@ Token* tokenize(const char* src) {
                 newToken = createToken(TOKEN_IDENTIFIER, str);
             }
             free(str);
-        }
-
-        else if (isdigit(*src)) {
+        } else if (isdigit(*src)) {
             const char* start = src;
             while (isNumberChar(*src)) src++;
             size_t length = src - start;
@@ -91,13 +88,11 @@ Token* tokenize(const char* src) {
             str[length] = '\0';
             newToken = createToken(TOKEN_NUMBER, str);
             free(str);
-        }
-        else if (isOperatorChar(*src)) {
+        } else if (isOperatorChar(*src)) {
             char op[2] = {*src, '\0'};
             newToken = createToken(TOKEN_OPERATOR, op);
             src++;
-        }
-        else if (isStringLiteralStartEnd(*src)) {
+        } else if (isStringLiteralStartEnd(*src)) {
             src++; // 문자열 리터럴 시작 부분 건너뛰기
             const char* start = src;
             while (!isStringLiteralStartEnd(*src) && *src != '\0') src++;
@@ -113,39 +108,27 @@ Token* tokenize(const char* src) {
             newToken = createToken(TOKEN_STRING_LITERAL, str);
             free(str);
             src++; // 문자열 리터럴 끝 부분 건너뛰기
-        }
-
-            if (head == NULL) {
-                head = newToken;
-                current = newToken;
-            } else {
-                current->next = newToken;
-                current = newToken;
-            }
-        } 
-        else {
-            // 여기서는 알려진 모든 토큰 유형에 대한 처리가 완료되었습니다.
-            // 만약 여기에 도달했다면, 알 수 없는 문자 또는 처리되지 않은 문자를 만난 것입니다.
-            // 이 경우 TOKEN_UNKNOWN 유형의 토큰을 생성할 수 있습니다.
+        } else if (isOperatorChar(*src)) {
+            // 연산자 처리가 이미 위에 있으므로 이 부분은 제거합니다.
+        } else {
             char unknown[2] = {*src, '\0'};
             newToken = createToken(TOKEN_UNKNOWN, unknown);
             src++;
+        }
 
-            if (head == NULL) {
-                head = newToken;
-                current = newToken;
-            } else {
-                current->next = newToken;
-                current = newToken;
-            }
+        if (head == NULL) {
+            head = newToken;
+            current = newToken;
+        } else if (newToken != NULL) { // NULL 체크 추가
+            current->next = newToken;
+            current = newToken;
         }
     }
     // 소스 코드의 끝에 도달했습니다. EOF 토큰을 추가합니다.
-    Token* eofToken = createToken(TOKEN_EOF, "EOF");
-    if (head == NULL) {
-        head = eofToken;
+    if (head != NULL) {
+        current->next = createToken(TOKEN_EOF, "EOF");
     } else {
-        current->next = eofToken;
+        head = createToken(TOKEN_EOF, "EOF");
     }
     return head;
 }
