@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-// 토큰 타입
 typedef enum {
     TOKEN_KEYWORD,
     TOKEN_IDENTIFIER,
@@ -14,19 +13,16 @@ typedef enum {
     TOKEN_UNKNOWN
 } TokenType;
 
-// 토큰 구조체
 typedef struct Token {
     TokenType type;
     char* value;
     struct Token* next;
 } Token;
 
-// 키워드 리스트
 const char* keywords[] = {
     "if", "else", "while", "for", "return"
 };
 
-// 키워드 확인 함수
 int isKeyword(const char* str) {
     for (int i = 0; i < sizeof(keywords)/sizeof(char*); i++) {
         if (strcmp(keywords[i], str) == 0) return 1;
@@ -34,27 +30,22 @@ int isKeyword(const char* str) {
     return 0;
 }
 
-// 식별자 확인 함수
 int isIdentifierChar(char c) {
     return isalpha(c) || c == '_' || isdigit(c);
 }
 
-// 숫자 확인 함수
 int isNumberChar(char c) {
-    return isdigit(c) || c == '.'; // 간단화를 위해, 정수 및 소수점만 고려
+    return isdigit(c) || c == '.';
 }
 
-// 연산자 확인 함수
 int isOperatorChar(char c) {
     return strchr("+-*/%=&|<>!", c) != NULL;
 }
 
-// 문자열 리터럴 시작/끝 확인 함수
 int isStringLiteralStartEnd(char c) {
     return c == '"';
 }
 
-// 토큰 생성 함수
 Token* createToken(TokenType type, const char* value) {
     Token* token = (Token*)malloc(sizeof(Token));
     token->type = type;
@@ -63,14 +54,11 @@ Token* createToken(TokenType type, const char* value) {
     return token;
 }
 
-// 토큰화 함수
-// 이 함수는 매우 기본적이며, 많은 C 언어 구문과 세부 사항을 처리하지 않습니다.
 Token* tokenize(const char* src) {
     Token* head = NULL;
     Token* current = NULL;
 
     while (*src) {
-        // 공백 건너뛰기
         if (isspace(*src)) {
             src++;
             continue;
@@ -78,7 +66,6 @@ Token* tokenize(const char* src) {
 
         Token* newToken = NULL;
 
-        // 식별자 또는 키워드
         if (isalpha(*src) || *src == '_') {
             const char* start = src;
             while (isIdentifierChar(*src)) src++;
@@ -86,7 +73,7 @@ Token* tokenize(const char* src) {
             char* str = (char*)malloc(length + 1);
             strncpy(str, start, length);
             str[length] = '\0';
-            
+
             if (isKeyword(str)) {
                 newToken = createToken(TOKEN_KEYWORD, str);
             } else {
@@ -94,31 +81,87 @@ Token* tokenize(const char* src) {
             }
             free(str);
         }
-        // 숫자
+
         else if (isdigit(*src)) {
             const char* start = src;
             while (isNumberChar(*src)) src++;
             size_t length = src - start;
-            char*
+            char* str = (char*)malloc(length + 1);
+            strncpy(str, start, length);
+            str[length] = '\0';
+            newToken = createToken(TOKEN_NUMBER, str);
+            free(str);
+        }
+        else if (isOperatorChar(*src)) {
+            char op[2] = {*src, '\0'};
+            newToken = createToken(TOKEN_OPERATOR, op);
+            src++;
+        }
+        else if (isStringLiteralStartEnd(*src)) {
+            src++; // 문자열 리터럴 시작 부분 건너뛰기
+            const char* start = src;
+            while (!isStringLiteralStartEnd(*src) && *src != '\0') src++;
+            if (*src == '\0') {
+                // 오류 처리: 문자열 리터럴이 닫히지 않음
+                // 여기서 오류 처리 로직을 추가할 수 있습니다.
+                break;
+            }
+            size_t length = src - start;
+            char* str = (char*)malloc(length + 1);
+            strncpy(str, start, length);
+            str[length] = '\0';
+            newToken = createToken(TOKEN_STRING_LITERAL, str);
+            free(str);
+            src++; // 문자열 리터럴 끝 부분 건너뛰기
+        }
 
+            if (head == NULL) {
+                head = newToken;
+                current = newToken;
+            } else {
+                current->next = newToken;
+                current = newToken;
+            }
+        } else {
+            // 여기서는 알려진 모든 토큰 유형에 대한 처리가 완료되었습니다.
+            // 만약 여기에 도달했다면, 알 수 없는 문자 또는 처리되지 않은 문자를 만난 것입니다.
+            // 이 경우 TOKEN_UNKNOWN 유형의 토큰을 생성할 수 있습니다.
+            char unknown[2] = {*src, '\0'};
+            newToken = createToken(TOKEN_UNKNOWN, unknown);
+            src++;
 
-// 토큰 리스트 출력 함수
+            if (head == NULL) {
+                head = newToken;
+                current = newToken;
+            } else {
+                current->next = newToken;
+                current = newToken;
+            }
+        }
+    }
+    // 소스 코드의 끝에 도달했습니다. EOF 토큰을 추가합니다.
+    Token* eofToken = createToken(TOKEN_EOF, "EOF");
+    if (head == NULL) {
+        head = eofToken;
+    } else {
+        current->next = eofToken;
+    }
+    return head;
+}
+
 void printTokens(Token* token) {
     while (token != NULL) {
         printf("Type: %d, Value: %s\n", token->type, token->value);
         Token* temp = token;
         token = token->next;
-        free(temp->value); // 동적 할당된 문자열 메모리 해제
-        free(temp); // 동적 할당된 토큰 메모리 해제
+        free(temp->value);
+        free(temp);
     }
 }
 
-// 메인 함수
 int main() {
     char code[] = "int main() { return 0; }";
     Token* tokens = tokenize(code);
     printTokens(tokens);
     return 0;
 }
-
-// tokenize 함수와 기타 필요한 함수들을 여기에 정의합니다.
