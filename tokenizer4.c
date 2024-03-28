@@ -122,7 +122,8 @@ Token* tokenize(const char* src) {
                 current->next = newToken;
                 current = newToken;
             }
-        } else {
+        } 
+        else {
             // 여기서는 알려진 모든 토큰 유형에 대한 처리가 완료되었습니다.
             // 만약 여기에 도달했다면, 알 수 없는 문자 또는 처리되지 않은 문자를 만난 것입니다.
             // 이 경우 TOKEN_UNKNOWN 유형의 토큰을 생성할 수 있습니다.
