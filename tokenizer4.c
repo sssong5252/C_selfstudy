@@ -149,6 +149,7 @@ int main() {
 
     printf("코드를 입력하세요: ");
     if (fgets(code, MAX_CODE_LENGTH, stdin) == NULL) {
+//fgets에사 
         printf("입력 오류가 발생했습니다.\n");
         return 1;
     }
